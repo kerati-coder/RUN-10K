@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PTM 10K">
+<meta name="theme-color" content="#E8501A">
+<title>Personal Training Mission</title>
+<link rel="manifest" href="/ptm-10k/manifest.json">
+<link rel="apple-touch-icon" href="/ptm-10k/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%;background:#F6F4F1}
+body{font-family:'IBM Plex Sans Thai',sans-serif;-webkit-font-smoothing:antialiased}
+#splash{position:fixed;inset:0;background:#F6F4F1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:9999;transition:opacity .4s}
+@keyframes spl{0%,100%{opacity:1}50%{opacity:.35}}
+#splash-icon{width:72px;height:72px;border-radius:20px;background:#1C1A2E;display:flex;align-items:center;justify-content:center;animation:spl 1.3s infinite}
+</style>
+</head>
+<body>
+<div id="splash">
+  <div id="splash-icon">
+    <svg width="44" height="44" viewBox="0 0 32 32" fill="none">
+      <circle cx="22" cy="5" r="3.2" fill="#E8501A"/>
+      <path d="M20 8.5 L16 14 L11 21" stroke="#E8501A" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M20 8.5 L26 12" stroke="#E8501A" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+      <path d="M17 12 L12 10" stroke="#E8501A" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+      <path d="M16 14 L19.5 20.5 L25 25" stroke="#E8501A" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M11 21 L9 27" stroke="#E8501A" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div style="font-size:18px;font-weight:700;color:#1C1A2E">Personal Training Mission</div>
+  <div style="font-size:12px;color:#B0ACC4;margin-top:2px">กำลังโหลด...</div>
+</div>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="/ptm-10k/app.js"></script>
+
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/ptm-10k/sw.js').catch(e=>console.log('SW error:',e));
+}
+</script>
+</body>
+</html>
