@@ -3924,7 +3924,7 @@ function App({
       color: C.inkMid,
       marginTop: 4
     }
-  }, badgeAnim.desc)));
+  }, badgeAnim.desc));
 }
 
 // ── ROOT WRAPPER ──────────────────────────────────────────────────────────────
