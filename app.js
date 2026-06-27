@@ -21,31 +21,62 @@ const RotateCcw = ({
   d: "M3.51 15a9 9 0 1 0 .49-3.21"
 }));
 
-// ── GOOGLE DRIVE SYNC ─────────────────────────────────────────────────────────
+// ── GOOGLE DRIVE SYNC (Sheets-based) ───────────────────────────────────────────
 let DRIVE_URL = localStorage.getItem('ptm:drive_url') || '';
-async function driveBackup(data) {
+async function driveBackup(done) {
   if (!DRIVE_URL) return;
   try {
+    // ส่ง done object พร้อม session metadata ทุกตัว
+    const sessions = SESSIONS.map(s => ({
+      session_id: s.id,
+      week: s.week,
+      phase: s.phase,
+      date: s.date,
+      type: s.type,
+      title: s.title,
+      km_target: s.km
+    }));
+
     await fetch(DRIVE_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'text/plain'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        action: 'save',
-        key: 'ptm:v6:done',
-        value: JSON.stringify(data)
+        action: 'bulk_save',
+        done: done,
+        sessions: sessions
       })
     });
-  } catch (e) {}
+  } catch (e) {
+    console.error('Drive backup error:', e);
+  }
 }
 async function driveRestore() {
   if (!DRIVE_URL) return null;
   try {
-    const r = await fetch(DRIVE_URL + '?action=load&key=ptm:v6:done');
+    const r = await fetch(DRIVE_URL + '?action=load_all');
     const j = await r.json();
-    return j.value ? JSON.parse(j.value) : null;
-  } catch {
+    if (j.ok && j.done) {
+      // Convert backend format back to app format
+      const converted = {};
+      Object.keys(j.done).forEach(sid => {
+        const d = j.done[sid];
+        converted[sid] = {
+          km: d.km,
+          xp: d.xp,
+          time: d.time,
+          rpe: d.rpe,
+          feel: 3, // default
+          notes: d.notes,
+          at: d.at
+        };
+      });
+      return converted;
+    }
+    return null;
+  } catch (e) {
+    console.error('Drive restore error:', e);
     return null;
   }
 }
@@ -3661,7 +3692,7 @@ function App({
   }, []);
   useEffect(() => {
     try {
-      localStorage.setItem('ptm:v5:done', JSON.stringify(done));
+      localStorage.setItem('ptm:v6:done', JSON.stringify(done));
     } catch (e) {}
   }, [done]);
   const stats = useMemo(() => calcStats(done), [done]);
