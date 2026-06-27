@@ -2,16 +2,16 @@
   "name": "Personal Training Mission",
   "short_name": "PTM 10K",
   "description": "ติดตามการซ้อมวิ่ง 10K แบบ Gamification",
-  "start_url": "/ptm-10k/",
-  "scope": "/ptm-10k/",
+  "start_url": "/RUN-10K/",
+  "scope": "/RUN-10K/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#F6F4F1",
   "theme_color": "#E8501A",
   "lang": "th",
   "icons": [
-    { "src": "/ptm-10k/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/ptm-10k/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/RUN-10K/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/RUN-10K/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
   "categories": ["health", "fitness", "sports"]
 }

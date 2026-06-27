@@ -1,11 +1,11 @@
-const CACHE = 'ptm-v4';
+const CACHE = 'ptm-v5';
 const ASSETS = [
-  '/ptm-10k/',
-  '/ptm-10k/index.html',
-  '/ptm-10k/app.js',
-  '/ptm-10k/manifest.json',
-  '/ptm-10k/icon-192.png',
-  '/ptm-10k/icon-512.png',
+  '/RUN-10K/',
+  '/RUN-10K/index.html',
+  '/RUN-10K/app.js',
+  '/RUN-10K/manifest.json',
+  '/RUN-10K/icon-192.png',
+  '/RUN-10K/icon-512.png',
   'https://unpkg.com/react@18/umd/react.production.min.js',
   'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js',
   'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap'
@@ -39,6 +39,6 @@ self.addEventListener('fetch', e => {
         }
         return res;
       })
-    ).catch(() => caches.match('/ptm-10k/index.html'))
+    ).catch(() => caches.match('/RUN-10K/index.html'))
   );
 });
