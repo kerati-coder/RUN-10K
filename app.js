@@ -3819,7 +3819,7 @@ function App({
       fontSize: 13,
       color: C.inkMid
     }
-  }, "📊")), /*#__PURE__*/React.createElement("div", {
+  }, "📊"), driveButton)), /*#__PURE__*/React.createElement("div", {
     style: {
       overflowY: "auto",
       height: "calc(100dvh - 57px - 62px - env(safe-area-inset-bottom))"
